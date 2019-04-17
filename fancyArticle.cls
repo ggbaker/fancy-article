@@ -102,7 +102,7 @@
 %% pica. These are roughly the block size recommended by Bringhurst
 %% given the standard font size of Libertinus. These options are all
 %% provided by the memoir class.
-\settypeblocksize{45pc}{35pc}{*}
+\settypeblocksize{50pc}{35pc}{*}
 
 %% Center the typeblock horizontally
 \setlrmargins{*}{*}{*}
