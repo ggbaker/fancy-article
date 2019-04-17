@@ -7,7 +7,7 @@ It is built on top of the [Memoir class](http://texdoc.net/texmf-dist/doc/latex/
 ## Dependecies
 
 1. XeLatex. All documents using this class must be compiled with this. Should be included in most common TeX distros.
-2. OpenType [Libertinus Font Family](https://github.com/libertinus-fonts/libertinus) (Arch users can install from the AUR as "otf-libertinus")
+2. OpenType [Libertinus Font Family](https://github.com/libertinus-fonts/libertinus) (Users of Arch and its descendants can install from the AUR as "otf-libertinus")
 3. A variety of other LaTeX packages. None should be non-standard, but all loaded packages are at the start of the file in case you happen to be using a minimalist TeX install.
 
 ## Usage
