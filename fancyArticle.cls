@@ -272,3 +272,7 @@
 
 %% Define command for upright d (used for the dx in integrals.)
 \newcommand{\D}{\mathrm{d}}
+
+% Define an argmax command similar to \max
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
