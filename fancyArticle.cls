@@ -1,5 +1,5 @@
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{fancyArticle}[2019/04/16 by G. Baker]
+\NeedsTeXFormat{XeLaTeX}
+\ProvidesClass{fancyArticle}[2020/05/17 by G. Baker]
 
 %% Use the memoir class as a base. All options passed to this file get
 %% passed to  the memoir class
