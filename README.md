@@ -1,6 +1,6 @@
-# fancyArticle
+# fancy-article
 
-fancyArticle is the class file I use for most writing. It mostly just allows me to have a somewhat cleaner preamble. Most of the file was written in 2015 while I was reading Bringhurst's *The Elements of Typographic Style*.
+fancy-article is the class file I use for most writing. It mostly just allows me to have a somewhat cleaner preamble. Most of the file was written in 2015 while I was reading Bringhurst's *The Elements of Typographic Style*.
 
 It is built on top of the [Memoir class](http://texdoc.net/texmf-dist/doc/latex/memoir/memman.pdf), and uses the [Libertinus](https://github.com/libertinus-fonts/libertinus) typeface family. Files using this class file must be compiled with XeLaTeX. 
 
