@@ -164,12 +164,12 @@
 
 %% Sets section style.
 %%%%%
-\renewcommand{\thesection}{\IfAppendix{\alph{section}}{\arabic{section}}}
+\renewcommand{\thesection}{\IfAppendix{\Alph{section}}{\arabic{section}}}
 \titleformat{\section}[hang]                              
   {\scshape\Large}               
   {\IfAppendix{\appendixname~}{\relax}\thesection}{1em}{\MakeLowercase{#1}}[]                                
-  \titlespacing*{\section}                                           
-  {0em}{17pt}{16pt}   
+  \titlespacing*{\section}                                       
+  {0em}{17pt}{16pt}
 %%%%%
 
 %% Sets subsection style
@@ -192,6 +192,10 @@
 \renewcommand{\abstractname}{abstract}
 \renewcommand{\abstractnamefont}{\scshape}
 \renewcommand{\abstracttextfont}{\small}
+% set abstract extra margin
+\setlength{\absleftindent}{5pt}
+\setlength{\absrightindent}{5pt}
+
 % Set check for appendix environment for formatting appendix sections
 \AtBeginEnvironment{appendices}{\appendixtrue}
 %%%%%%
@@ -236,6 +240,7 @@
 \newtheorem*{lemma*}{Lemma}
 \newtheorem{proposition}{Proposition}
 \newtheorem{corollary}{Corollary}
+\newtheorem*{corollary*}{Corollary}
 \newtheorem{definition}{Definition}
 \newtheorem*{definition*}{Definition}
 \newtheorem{assumption}{Assumption}
