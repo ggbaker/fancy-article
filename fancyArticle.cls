@@ -32,6 +32,9 @@
 %% distribution
 \RequirePackage{metalogo}
 
+%% Use the comment package for commenting blocks of text
+\RequirePackage{comment}
+
 %% Hyperref to create intra-document links between referenced objects
 %% and their references. The "hidelinks" option suppresses the usual
 %% colored boxes around links. 
@@ -64,7 +67,7 @@
     Numbers=Lowercase,
     SmallCapsFeatures={
       Letters=SmallCaps,
-      LetterSpace=6},
+      LetterSpace=7,},
   },
   ]{Libertinus Serif}
 
@@ -102,7 +105,7 @@
 %% pica. These are roughly the block size recommended by Bringhurst
 %% given the standard font size of Libertinus. These options are all
 %% provided by the memoir class.
-\settypeblocksize{50pc}{35pc}{*}
+\settypeblocksize{54pc}{37pc}{*}
 
 %% Center the typeblock horizontally
 \setlrmargins{*}{*}{*}
@@ -245,24 +248,21 @@
 \newtheorem*{definition*}{Definition}
 \newtheorem{assumption}{Assumption}
 
-%% Will probably remove this at some point. This environment was
-%% created to make piecewise equations. Older versions of this file
-%% had a bug when using the "cases" environment in amsmath that would
-%% produce a boxed-x glyph after them. I think this bug no longer
-%% exists since the switch to the Libertinus typeface, The "cases"
-%% environment /should/ work fine.
-\newenvironment{piecewise}
-  {\left\{
-      \begin{array}{ll}
-        }
-        {
-      \end{array}\color{white}\right\}}
+%% The autoref command allows automatic insertion of the type of
+%% environment before a referenced number.
+%% Define the labels for different environments
+\def\propositionautorefname{Prop.}
+\def\corollaryautorefname{Cor.}
+\def\lemmaautorefname{Lem.}
+\def\theoremautorefname{Thm.}
+\def\equationautorefname{Eq.}
+\def\sectionautorefname{Section}
+\def\figureautorefname{Fig.}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% CUSTOM COMMANDS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-
 
 %% Create commands for cursive ampersand and letterspaced uppercase
 \newcommand{\itand}{\XeTeXglyph2406}
@@ -278,6 +278,11 @@
 %% Define command for upright d (used for the dx in integrals.)
 \newcommand{\D}{\mathrm{d}}
 
-% Define an argmax command similar to \max
+%% Define an argmax command similar to \max
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+
+%% Define a commands for coloring text
+\RequirePackage{xcolor}
+\newcommand{\red}{\color{red}}
+\newcommand{\blue}{\color{blue}}
