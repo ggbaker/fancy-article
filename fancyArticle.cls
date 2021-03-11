@@ -244,6 +244,8 @@
 \newtheorem{proposition}{Proposition}
 \newtheorem{corollary}{Corollary}
 \newtheorem*{corollary*}{Corollary}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem*{conjecture*}{Conjecture}
 \newtheorem{definition}{Definition}
 \newtheorem*{definition*}{Definition}
 \newtheorem{assumption}{Assumption}
