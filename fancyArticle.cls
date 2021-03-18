@@ -152,15 +152,21 @@
 %% works. Like much of this section, it's cobbled together from many
 %% old stackexchange posts.
 %%%%%
-\pretitle{\vspace{-3em}\begin{center}\Large\LibTitle\MakeUppercase}
-  \posttitle{\par\end{center}\vskip 0.5em}
+\pretitle{\vspace{-3em}\begin{center}\normalsize\LibTitle\MakeUppercase}
+  \posttitle{\par\end{center}\vskip 0.3em}
   \preauthor{\begin{center}
-      \large \lineskip 0.5em%
+      \normalsize \lineskip 0.5em%
       \begin{tabular}[t]{c}}
  \postauthor{\end{tabular}\par\end{center}}
- \predate{\begin{center}\large}
+ \predate{\begin{center}\small}
  \postdate{\par\end{center}\vspace{-1em}}
 %%%%%
+
+
+%% Change format of date (\today) to dd MM yyyy
+\RequirePackage{datetime}
+\renewcommand{\today}{\the\day\ \monthname[\the\month] \the\year}
+
 
 %% Assign numbers down to the subsection level. 
 \setsecnumdepth{subsection}
@@ -169,7 +175,7 @@
 %%%%%
 \renewcommand{\thesection}{\IfAppendix{\Alph{section}}{\arabic{section}}}
 \titleformat{\section}[hang]                              
-  {\scshape\Large}               
+  {\scshape\large}               
   {\IfAppendix{\appendixname~}{\relax}\thesection}{1em}{\MakeLowercase{#1}}[]                                
   \titlespacing*{\section}                                       
   {0em}{17pt}{16pt}
