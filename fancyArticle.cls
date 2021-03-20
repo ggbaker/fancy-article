@@ -259,13 +259,13 @@
 %% The autoref command allows automatic insertion of the type of
 %% environment before a referenced number.
 %% Define the labels for different environments
-\def\propositionautorefname{Prop.}
-\def\corollaryautorefname{Cor.}
-\def\lemmaautorefname{Lem.}
-\def\theoremautorefname{Thm.}
-\def\equationautorefname{Eq.}
+\def\propositionautorefname{Proposition}
+\def\corollaryautorefname{Corollary}
+\def\lemmaautorefname{Lemma}
+\def\theoremautorefname{Theorem}
+\def\equationautorefname{Equation}
 \def\sectionautorefname{Section}
-\def\figureautorefname{Fig.}
+\def\figureautorefname{Figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
