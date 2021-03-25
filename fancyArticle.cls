@@ -183,10 +183,10 @@
 
 %% Sets subsection style
 %%%%%
-\renewcommand{\thesubsection}{\arabic{subsection}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
 \titleformat{\subsection}[hang]                              
   {\itshape}
-  {\thesection.\thesubsection}{1em}{#1}[]                                
+  {\thesubsection}{1em}{#1}[]
   \titlespacing*{\subsection}                                           
   {0em}{9pt}{9pt}   
 %%%%%
