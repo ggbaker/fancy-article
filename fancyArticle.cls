@@ -8,12 +8,14 @@
 \ProcessOptions
 
 \LoadClass[
-  letterpaper,
+  % letterpaper,
+  a4paper,
   oneside,
   12pt,
   article,
-  oldfontcommands
+  oldfontcommands,
   ]{memoir}
+
 %%%%%
   
 %% Use natbib for bibliography formatting.
@@ -52,10 +54,12 @@
 %% latin letters, and upright everywhere else. The remaining
 %% 'upgright' commands are to match that style.
 \RequirePackage[
-  math-style=french,
+  % math-style=french,
+  math-style=ISO,
   bold-style=upright,
   nabla=upright,
-  partial=upright
+  partial=upright,
+  mathbf=sym,
   ]{unicode-math}
 
 %% Use Libertinus Serif as the default font. Use inline numerals when
@@ -64,7 +68,7 @@
   Mapping=tex-text,
   Ligatures=TeX,
   UprightFeatures={
-    Numbers=Lowercase,
+    % Numbers=Lowercase,
     SmallCapsFeatures={
       Letters=SmallCaps,
       LetterSpace=7,},
@@ -105,7 +109,7 @@
 %% pica. These are roughly the block size recommended by Bringhurst
 %% given the standard font size of Libertinus. These options are all
 %% provided by the memoir class.
-\settypeblocksize{54pc}{37pc}{*}
+\settypeblocksize{60pc}{38pc}{*}
 
 %% Center the typeblock horizontally
 \setlrmargins{*}{*}{*}
@@ -176,7 +180,8 @@
 \renewcommand{\thesection}{\IfAppendix{\Alph{section}}{\arabic{section}}}
 \titleformat{\section}[hang]                              
   {\scshape\large}               
-  {\IfAppendix{\appendixname~}{\relax}\thesection}{1em}{\MakeLowercase{#1}}[]                                
+  % {\IfAppendix{\appendixname~}{\relax}\thesection}{1em}{\MakeLowercase{#1}}[]
+  {\IfAppendix{\MakeLowercase{\appendixname~}}{\relax}\MakeLowercase{\thesection}}{1em}{\MakeLowercase{#1}}[]
   \titlespacing*{\section}                                       
   {0em}{17pt}{16pt}
 %%%%%
@@ -202,8 +207,8 @@
 \renewcommand{\abstractnamefont}{\scshape}
 \renewcommand{\abstracttextfont}{\small}
 % set abstract extra margin
-\setlength{\absleftindent}{5pt}
-\setlength{\absrightindent}{5pt}
+\setlength{\absleftindent}{2.5pc}
+\setlength{\absrightindent}{2.5pc}
 
 % Set check for appendix environment for formatting appendix sections
 \AtBeginEnvironment{appendices}{\appendixtrue}
@@ -211,8 +216,8 @@
 
 %% Footnote style
 %%%%%
-% Increases footenote separation and removes horizontal line
-\renewcommand\footnoterule{\rule{\linewidth}{0pt}}
+% Increases footenote separation and sets horizontal line length
+\renewcommand\footnoterule{\noindent\rule{0.15\linewidth}{0.5pt}}
 \setlength{\footnotesep}{14pt}
 % Sets footnote style
 \footmarkstyle{#1}
@@ -244,17 +249,30 @@
   \itshape% Regular text is also italic
 }
 
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}{Lemma}
+%% Math environments
+\newcounter{lem}                              % counter for lemmas
+\newtheorem{lemma}[lem]{Lemma}                % lemma environment
 \newtheorem*{lemma*}{Lemma}
-\newtheorem{proposition}{Proposition}
-\newtheorem{corollary}{Corollary}
+\newcounter{prop}                             % counter for propositions
+\newtheorem{proposition}[prop]{Proposition}   % proposition environment
+\newtheorem*{proposition*}{Proposition}
+\newcounter{thm}                              % counter for theorems
+\newtheorem{theorem}[thm]{Theorem}            % theorem environment
+\newtheorem*{theorem*}{Theorem}
+\newcounter{cor}                              % counter for corollaries
+\newtheorem{corollary}[cor]{Corollary}        % corollary environment
 \newtheorem*{corollary*}{Corollary}
-\newtheorem{conjecture}{Conjecture}
+\newcounter{conj}                             % counter for conjectures
+\newtheorem{conjecture}[conj]{Conjecture}     % conjecture environment
 \newtheorem*{conjecture*}{Conjecture}
-\newtheorem{definition}{Definition}
+\newcounter{def}                              % counter for definitions
+\newtheorem{definition}[def]{Definition}      % definition environment
 \newtheorem*{definition*}{Definition}
-\newtheorem{assumption}{Assumption}
+\newcounter{assum}                            % counter for assumptions
+\newtheorem{assumption}[assum]{Assumption}    % assumption environment
+\newtheorem*{assumption*}{Assumption}
+
+
 
 %% The autoref command allows automatic insertion of the type of
 %% environment before a referenced number.
@@ -266,6 +284,13 @@
 \def\equationautorefname{Equation}
 \def\sectionautorefname{Section}
 \def\figureautorefname{Figure}
+%% Make equation references put number in ()
+\makeatletter
+\def\tagform@#1{\maketag@@@{\ignorespaces#1\unskip\@@italiccorr}}
+\let\orgtheequation\theequation
+\def\theequation{(\orgtheequation)}
+\makeatother
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -294,3 +319,6 @@
 \RequirePackage{xcolor}
 \newcommand{\red}{\color{red}}
 \newcommand{\blue}{\color{blue}}
+
+%% QED symbol
+\renewcommand{\qedsymbol}{\textit{Q.E.D.}}
