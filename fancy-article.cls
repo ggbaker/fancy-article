@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{fancyArticle}[2020/05/17 by G. Baker]
+\ProvidesClass{fancy-article}[2025-12-25 by G. Baker]
 
 %% Use the memoir class as a base. All options passed to this file get
 %% passed to  the memoir class
@@ -8,8 +8,8 @@
 \ProcessOptions
 
 \LoadClass[
-  % letterpaper,
-  a4paper,
+  letterpaper,
+  %a4paper,
   oneside,
   12pt,
   article,
@@ -109,7 +109,7 @@
 %% pica. These are roughly the block size recommended by Bringhurst
 %% given the standard font size of Libertinus. These options are all
 %% provided by the memoir class.
-\settypeblocksize{60pc}{38pc}{*}
+\settypeblocksize{55pc}{35pc}{*}
 
 %% Center the typeblock horizontally
 \setlrmargins{*}{*}{*}
@@ -138,20 +138,6 @@
 %% TITLE AND SECTION HEADING STYLES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-%% The titlesec package allows respecifying all title styles 
-\RequirePackage[explicit]{titlesec}
-
-%% This is needed to fix some weird bugs with numbering. I have no
-%% idea what it actually does. This code came from some long-lost
-%% stackexchange post...
-%%%%%
-\usepackage{etoolbox, apptools}
-\makeatletter
-\patchcmd{\ttlh@hang}{\parindent\z@}{\parindent\z@\leavevmode}{}{}
-\patchcmd{\ttlh@hang}{\noindent}{}{}{}
-\makeatother
-%%%%%
-
 %% Sets title style. I really don't understand how titlesec
 %% works. Like much of this section, it's cobbled together from many
 %% old stackexchange posts.
@@ -171,30 +157,31 @@
 \RequirePackage{datetime}
 \renewcommand{\today}{\the\day\ \monthname[\the\month] \the\year}
 
+%% Set numbering style for sections
+% Ensure sections are not chapter-based (prevents 0.1, 0.2, ...)
+\setsecnumdepth{subsubsection}
+\renewcommand{\thesection}{\arabic{section}}%
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}%
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}%
+\let\fancy@origappendix\appendix
+\renewcommand{\appendix}{%
+  \fancy@origappendix
+  \renewcommand{\thesection}{\Alph{section}}%
+  \renewcommand{\thesubsection}{\thesection.\arabic{subsection}}%
+  \renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}%
+}
 
-%% Assign numbers down to the subsection level. 
-\setsecnumdepth{subsection}
-
-%% Sets section style.
-%%%%%
-\renewcommand{\thesection}{\IfAppendix{\Alph{section}}{\arabic{section}}}
-\titleformat{\section}[hang]                              
-  {\scshape\large}               
-  % {\IfAppendix{\appendixname~}{\relax}\thesection}{1em}{\MakeLowercase{#1}}[]
-  {\IfAppendix{\MakeLowercase{\appendixname~}}{\relax}\MakeLowercase{\thesection}}{1em}{\MakeLowercase{#1}}[]
-  \titlespacing*{\section}                                       
-  {0em}{17pt}{16pt}
-%%%%%
+%% Set the section heading style and spacing
+\setsecheadstyle{\scshape\large\MakeTextLowercase}
+  \setsecindent{0em}
+  \setbeforesecskip{17pt}
+  \setaftersecskip{16pt}
 
 %% Sets subsection style
-%%%%%
-\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
-\titleformat{\subsection}[hang]                              
-  {\itshape}
-  {\thesubsection}{1em}{#1}[]
-  \titlespacing*{\subsection}                                           
-  {0em}{9pt}{9pt}   
-%%%%%
+\setsubsecheadstyle{\itshape}
+  \setsubsecindent{0em}
+  \setbeforesubsecskip{9pt}
+  \setaftersubsecskip{9pt}
   
 %% Sets bibliography heading style
 \AtBeginDocument{
@@ -202,7 +189,6 @@
 }
 
 %% Sets abstract style
-%%%%%
 \renewcommand{\abstractname}{abstract}
 \renewcommand{\abstractnamefont}{\scshape}
 \renewcommand{\abstracttextfont}{\small}
@@ -210,12 +196,7 @@
 \setlength{\absleftindent}{2.5pc}
 \setlength{\absrightindent}{2.5pc}
 
-% Set check for appendix environment for formatting appendix sections
-\AtBeginEnvironment{appendices}{\appendixtrue}
-%%%%%%
-
 %% Footnote style
-%%%%%
 % Increases footenote separation and sets horizontal line length
 \renewcommand\footnoterule{\noindent\rule{0.15\linewidth}{0.5pt}}
 \setlength{\footnotesep}{14pt}
@@ -225,15 +206,13 @@
 \setlength{\footmarksep}{0.7em}
 %%%%%
 
-%% Sets title footnote style - Not recommended. Use \thanksA commands
-%% below with manual markers instead
+%% Sets title footnote style
 %%%%%
 \thanksmarkseries{fnsymbol}
 \thanksmarkstyle{#1}                       
 \setlength{\thanksmarkwidth}{-0.7em}
 \setlength{\thanksmarksep}{0.7em}
 %%%%%
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% CUSTOM ENVIRONMENTS
@@ -272,8 +251,6 @@
 \newtheorem{assumption}[assum]{Assumption}    % assumption environment
 \newtheorem*{assumption*}{Assumption}
 
-
-
 %% The autoref command allows automatic insertion of the type of
 %% environment before a referenced number.
 %% Define the labels for different environments
@@ -294,8 +271,6 @@
 \def\theequation{(\orgtheequation)}
 \makeatother
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% CUSTOM COMMANDS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -303,10 +278,6 @@
 %% Create commands for cursive ampersand and letterspaced uppercase
 \newcommand{\itand}{\XeTeXglyph2406}
 \newcommand{\textuc}[1]{\addfontfeature{LetterSpace=12.0} \uppercase{#1} \addfontfeature{LetterSpace=0.0}}
-
-%% custom title footnote commands
-\newcommand{\thanksA}[1]{\renewcommand*{\thefootnote}{\fnsymbol{footnote}}\footnotetext[1]{#1}\renewcommand*{\thefootnote}{\arabic{footnote}}\setcounter{footnote}{0}}
-\newcommand{\thanksB}[1]{\renewcommand*{\thefootnote}{\fnsymbol{footnote}}\footnotetext[2]{#1}\renewcommand*{\thefootnote}{\arabic{footnote}}\setcounter{footnote}{0}}
 
 %% Underbar command for math
 \newcommand{\ubar}[1]{\text{\b{$#1$}}}
